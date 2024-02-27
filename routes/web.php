@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/','welcome')->name('welcome');
 
+Route::get('/chirps', function () {
+    return 'Welcome to our chirp page';
+})->name('chirps.index');
+
+// Route by Breeze
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
