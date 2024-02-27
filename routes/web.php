@@ -16,19 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/','welcome')->name('welcome');
 
-Route::get('/chirps', function () {
-    return 'Welcome to our chirp page';
-})->name('chirps.index');
-
-// Route by Breeze
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+//Routes with user logged
 Route::middleware('auth')->group(function () {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/chirps', function () {
+        return 'Welcome to our chirp page';
+    })->name('chirps.index');
 });
 
 require __DIR__.'/auth.php';
