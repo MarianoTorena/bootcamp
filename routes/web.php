@@ -19,14 +19,15 @@ Route::view('/','welcome')->name('welcome');
 //Routes with user logged
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/chirps', function () {
-        return 'Welcome to our chirp page';
+        return view('chirps.index');
     })->name('chirps.index');
 });
+
 
 require __DIR__.'/auth.php';
