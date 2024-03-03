@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    
     Route::get('/chirps', function () {
         return view('chirps.index');
     })->name('chirps.index');
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
             'message' => request('message'),
             'user_id' => auth()->id(),
         ]);
-        return to_route('chirps.index');
+        return to_route('chirps.index')->with('status' , __('Chirp created Successfully!'));
     });
 });
 
