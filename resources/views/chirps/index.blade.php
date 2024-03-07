@@ -9,15 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                    
                     <form action="" method="POST" action="{{ route('chirps.store') }}">
                         @csrf
                         <textarea 
                             name="message" 
                             placeholder="{{ __('What\'s on your mind?') }}"
                             class="dark:bg-slate-200 block w-full shadow-sm rounded-none mb-3 border-gray-300"
-                        >
-                        </textarea>
-                        <x-primary-button>{{ __('Chirp') }}</x-primary-button> 
+                        >{{ old('message') }}</textarea>
+                        <x-input-error :messages="$errors->get('message')"
+                            class="mt-2"    
+                        />
+                        {{-- @error('message') {{ $message }} @enderror --}}
+                        <x-primary-button class="mt-2">{{ __('Chirp') }}</x-primary-button> 
                     </form>
                 </div>
             </div>
